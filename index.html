@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <title>IRON TV MAX — Offre 12 mois</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: Arial, sans-serif;
+      background: #101010; color: #fff; line-height: 1.6;
+    }
+    header {
+      padding: 24px 16px; text-align: center;
+      border-bottom: 1px solid #333;
+    }
+    .logo { font-size: 30px; font-weight: 900; letter-spacing: 2px; }
+    .logo span { color: #e5b323; }
+    main { max-width: 850px; margin: auto; padding: 36px 18px; }
+    .hero, .card {
+      background: #1c1c1c; border: 1px solid #353535;
+      border-radius: 16px; padding: 28px; margin-bottom: 22px;
+    }
+    h1 { font-size: clamp(30px, 6vw, 48px); line-height: 1.15; }
+    h2 { color: #f0c33c; }
+    .price { font-size: 38px; font-weight: 900; color: #f0c33c; }
+    .muted { color: #c2c2c2; }
+    .button {
+      display: inline-block; text-decoration: none; text-align: center;
+      padding: 14px 20px; margin-top: 12px; border-radius: 9px;
+      background: #f0c33c; color: #111; font-weight: bold;
+    }
+    .secondary { background: #292929; color: white; border: 1px solid #555; }
+    li { margin: 8px 0; }
+    footer { text-align: center; padding: 25px; color: #aaa; }
+    input, textarea {
+      display: block; width: 100%; padding: 12px; margin: 10px 0;
+      border: 1px solid #555; border-radius: 8px; background: #111;
+      color: white; font: inherit;
+    }
+    label { display: block; margin-top: 12px; }
+    .notice { font-size: 13px; color: #aaa; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">IRON <span>TV MAX</span></div>
+    <div class="muted">Votre espace de commande</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p style="color:#f0c33c;font-weight:bold">OFFRE UNIQUE</p>
+      <h1>Bienvenue chez IRON TV MAX</h1>
+      <p class="muted">Retrouvez les informations de notre offre et contactez-nous pour votre commande.</p>
+      <div class="price">50 € <span style="font-size:17px">/ 12 mois</span></div>
+      <a class="button" href="#commande">Commander via WhatsApp</a>
+      <p class="notice">La commande doit être confirmée par notre équipe. Aucun paiement n’est réalisé directement sur cette page.</p>
+    </section>
+
+    <section class="card">
+      <h2>Installation Android</h2>
+      <p>Suivez les instructions qui vous seront communiquées lors de la commande.</p>
+      <ul>
+        <li>Code Downloader : <strong>347824</strong></li>
+        <li>Code alternatif : <strong>7182691</strong></li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Samsung et LG</h2>
+      <p>Pour les téléviseurs compatibles, consultez les instructions de configuration Hot IPTV fournies par notre équipe. La compatibilité et les éventuels frais d’application doivent être vérifiés avant l’achat.</p>
+    </section>
+
+    <section class="card" id="commande">
+      <h2>Demande de commande</h2>
+      <p class="muted">Renseignez vos coordonnées puis ouvrez WhatsApp pour nous envoyer votre demande.</p>
+      <form id="orderForm">
+        <label for="customer">Votre nom</label>
+        <input id="customer" required maxlength="100" placeholder="Votre nom">
+        <label for="contact">Votre contact ou identifiant appareil</label>
+        <input id="contact" required maxlength="150" placeholder="Contact WhatsApp ou référence utile">
+        <label for="device">Votre appareil</label>
+        <input id="device" required maxlength="100" placeholder="Android, Samsung, LG…">
+        <label for="message">Message (facultatif)</label>
+        <textarea id="message" maxlength="1000" rows="3" placeholder="Votre question"></textarea>
+        <button class="button" type="submit" style="border:0;cursor:pointer">Préparer ma demande WhatsApp</button>
+      </form>
+      <p class="notice">Le formulaire ouvre WhatsApp : il ne sauvegarde pas la commande dans une base de données.</p>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> IRON TV MAX</footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("orderForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const name = document.getElementById("customer").value.trim();
+      const contact = document.getElementById("contact").value.trim();
+      const device = document.getElementById("device").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const text = "Bonjour IRON TV MAX, je souhaite commander l’offre 50 € / 12 mois.%0A"
+        + "Nom : " + encodeURIComponent(name)
+        + "%0AContact / référence : " + encodeURIComponent(contact)
+        + "%0AAppareil : " + encodeURIComponent(device)
+        + "%0AMessage : " + encodeURIComponent(message);
+      /* Remplace le numéro ci-dessous par ton numéro WhatsApp au format international,
+         sans +, espaces ni tirets, avant de publier. */
+      const whatsappNumber = "REMPLACER_PAR_TON_NUMERO";
+      if (!/^[0-9]{8,15}$/.test(whatsappNumber)) {
+        alert("Le site doit d’abord être configuré avec ton numéro WhatsApp international.");
+        return;
+      }
+      window.open("https://wa.me/" + whatsappNumber + "?text=" + text, "_blank", "noopener");
+    });
+  </script>
+</body>
+</html>
